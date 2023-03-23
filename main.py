@@ -1,15 +1,20 @@
-tree = "-ETIANMSURWDKGOHVF*L*PJBXCYZQ**54*3***2**+****16=/*****7***8*90"
-#"-ETIANMSURWDKGOHVF*L*PJBXCYZQ**54*3*¿?2&*+****16=/***(*7***8*90*************_****”**.********'**-********;!*)***¡*,****:****************$-"
+from heap import MorseHeap
 
-#R
-tree[(2*1)]
-tree[2]
-#w
-tree[(2*1)+1]
-tree[3]
-#L
-tree[(2*2)]
-tree[4]
+if __name__ == "__main__":
+    morse = MorseHeap()
 
+    #task1 - decode
+    print('--------MORSE TO TEXT-------------')
+    #morse_message = input(('Enter morse to decode ==> '))
+    #decoded = morse.decode_bt(morse_message)
+    #print('Decoded message: ' + decoded)
 
-print(tree[(2*0)])
+    #task2 - ham radio conversations
+    receiver = input('Enter receiver ==> ') #r1
+    sender  = input('Enter sender ==> ') #s1
+    message = input('Enter message ==> ') #hi
+
+    encode='hi'
+    decode_message = ".-. .---- -.. . ... .---- -...- .... .. -...- -.--."
+    print(morse.encode_ham(receiver,sender,message))
+    print(morse.decode_ham(decode_message))
