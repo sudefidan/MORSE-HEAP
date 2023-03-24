@@ -14,7 +14,6 @@ class MorseHeap:
                     '','','','','','','','','','$'] 
         
     #TASK1
-
     #converts morse to text
     #E.g Input: .-- . / .-.. --- ...- . / .--. -.-. / -.-.-- ==> Output: WE LOVE PC !
     def decode_bt(self, code):
@@ -34,19 +33,16 @@ class MorseHeap:
 
    
     #TASK2
-    def encode_ham(self, receiver,sender,message):
-        # method to encode message for ham radio. Uses Node() from morse.py
-        # returns String
-        conversation = sender + "de" + receiver + "=" + message + "=("
-        print(conversation)
-        morse= MorseTree
-        print(morse.encode(conversation))
-        print(MorseTree.encode(conversation))
-
-        return MorseTree.encode(sender + "de" + receiver + "=" + message + "=(")
+    #encoding ham conversations
+    #E.g. Innput: receiver('r1'),sender('s1'),message('hi') ==> Output: .-. .---- -.. . ... .---- -...- .... .. -...- -.--.
+    def encode_ham(self, sender, receiver,message):
+        #Uses binary tree from morse.py for encoding
+        morse= MorseTree()
+        return morse.encode(receiver + "de" + sender + "=" + message + "=(")
 
     
-    
+    #decoding ham conversations
+    #E.g. Input: .-. .---- -.. . ... .---- -...- .... .. -...- -.--. ==> Output: RECEIVER:R1 SENDER:S1 MESSAGE:HI
     def decode_ham(self,code):
         decoded=self.decode_bt(code)
         #word before 'de' is receiver
@@ -55,7 +51,12 @@ class MorseHeap:
         sender= decoded[decoded.find('DE')+len('DE'):decoded.rfind('=')].split('=')[0]
         #message is between "="
         transmit = decoded[decoded.find('=')+len('='):decoded.rfind('=(')]
-        return f'RECEIVER: ' + receiver + f'\nSENDER: ' + sender + f'\nMESSAGE: ' + transmit 
+        return f'RECEIVER: ' + receiver + f'\nSENDER: ' + sender + f'\nMESSAGE: ' + transmit
+    
+    
 
-morse = MorseHeap()
-print(morse.encode_ham('r1','s1','hi'))
+
+
+
+
+
