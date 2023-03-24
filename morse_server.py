@@ -15,7 +15,7 @@ async def main():
             # If first message is not the join message exit
             print("Did not receive a correct join message") 
         # Send a ping to the server
-        await send_echo(websocket, 'ping', client_id)
+        await send_echo(websocket, 'ping', client_id)   
         # Wait for the 'ping' response from the server
         response = await send_time(websocket)  
         print("The Server Sent Back:")
