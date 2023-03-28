@@ -35,10 +35,14 @@ class MorseHeap:
     #TASK2
     #encoding ham conversations
     #E.g. Innput: receiver('r1'),sender('s1'),message('hi') ==> Output: .-. .---- -.. . ... .---- -...- .... .. -...- -.--.
-    def encode_ham(self, sender, receiver,message):
+    @staticmethod
+    def encode_ham(sender:str, receiver:str,message:str) -> str:
         #Uses binary tree from morse.py for encoding
         morse= MorseTree()
-        return morse.encode(receiver + "de" + sender + "=" + message + "=(")
+        encoded = {  
+            'message': morse.encode(str(receiver) + "de" + str(sender) + "=" + str(message) + "=(" )
+        }
+        return encoded['message']
 
     
     #decoding ham conversations

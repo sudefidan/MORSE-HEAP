@@ -14,7 +14,7 @@ if __name__ == "__main__":
     receiver = input('Enter receiver ==> ') #r1
     sender  = input('Enter sender ==> ') #s1
     message = input('Enter message ==> ') #hi
-    print('Encoded ham conversation: ', morse.encode_ham(sender,receiver,message))
+    print('Encoded ham conversation: ', MorseHeap.encode_ham(sender,receiver,message))
     #decoding
     print('--------DECODING HAM CONVERSATIONS-------------')
     ham_convo = input(('Enter ham conversation to decode ==> '))
