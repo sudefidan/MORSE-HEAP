@@ -54,12 +54,3 @@ async def send_time(sender):
         response = await recv_message(websocket)
         return response
 
-if __name__ == "__main__": 
-    print("Echo client")
-    asyncio.run(main())
-    sender = input(('Hey sender, enter your name ==> '))
-    message = input(('Hey sender, enter your message ==> '))
-    print('--------SERVER:ECHO-------------')
-    print(f'Server response: ', asyncio.run(send_echo(sender,message)))
-    print('--------SERVER:TIME-------------')
-    print('Server response: ', asyncio.run(send_time(sender)))

@@ -45,12 +45,10 @@ class TestMorse(unittest.TestCase):
     #test5 - time server
     def test_time(self):
         self.assertIn('-.. .',asyncio.run(send_time('10+10'))) #true  -.. .==> de
+        self.assertIn('-...- -.--.',asyncio.run(send_time('sude fidan'))) #true  -...- -.--. ==> =(
         self.assertIn('- .. -- .',asyncio.run(send_time('sender'))) #true  - .. -- .==> time
         self.assertNotEqual( asyncio.run(send_time('benedict 2023')), '-... . -. . -.. .. -.-. - ..--- ----- ..--- ...-- -.. . - .. -- . -...- .---- ....- ---... ....- --... ---... ...-- --... -...- -.--.') #false ==> server time changes
         self.assertIsNotNone(asyncio.run(send_time('2020+2023')))
-
-
-
 
 if __name__ == '__main__':
     print('\n\n\n----------------------------- UNIT TESTING ---------------------------\n')
