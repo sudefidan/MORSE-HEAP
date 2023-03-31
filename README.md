@@ -1,92 +1,191 @@
-# worksheet2part2
+# **WORKSHEET2 - MORSE HEAP**
 
+## 🚀 **Getting Started**
 
+This repository contains python module that creates a binary heap for morse code. By using that module you can do translation between morse code and sentence. Binary Heap uses binary tree to accomplish some features [[Morse Tree](https://gitlab.uwe.ac.uk/s2-fidan/worksheet2part1.git)].
 
-## Getting started
+![morse tree](images/morsetree.jpg)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## 🖥️ **How to Run**
+0. Ensure you have [python3](https://www.python.org/download/releases/3.0/) installed.
+   
+   At a command prompt, type `python --version` to ensure you have version 3.
+1. Download or clone this repository.
+   
+   If you download as a zip file, be sure to unzip it.
+2. To decode morse code with using binary heap, run main.py
+3. To decode and encode ham conversations, run main.py
+4. To use echo and time services through WebSocket, run main.py.
+5. To do unit testing, run morseunit.py
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## 🔧 **Implementations**
+**Morse Heap Implementation :** *Tree is implemented with decode_bt(), encode_ham(), decode_ham() functions.*
 
-## Add your files
+**Morse Server Implementation :**  Server has two services including echo and time.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+**Unit Test Implementation:** *Test are done using assertIn(), assertNotIn(), assertEqual(), assertNotEqual(), assertCountEqual(), assertIsNotNone()*
+## 🎯 **Features**
+* Translation from morse code to text (decoding)
+* Ham conversation from text to morse code(encoding).
+* Ham conversation from morse to text code(decoding).
+* Echo server service(return echo).
+* Time server service(return time).
+* Unit testing.
 
+## 🖇️ **Example Usage**
+
+📍 Main.py
+
+User can translate from text to morse and morse to text:
+```python
+#messages
+print('--------MORSE TO TEXT-------------')
+morse_message = input(('Enter morse to decode ==> ')) 
+print('Decoded message: ', morse.decode_bt(morse_message))
 ```
-cd existing_repo
-git remote add origin https://gitlab.uwe.ac.uk/s2-fidan/worksheet2part2.git
-git branch -M main
-git push -uf origin main
+Expected Output:
+
+![decode_bt](images/decode_bt.jpg)
+
+Here is some other examples with their expected output to try:
+Text  | Morse
+------------- | -------------
+Sude Fidan  | ... ..- -.. . / ..-. .. -.. .- -.
+2023 + 2017 | ..--- ----- ..--- ...-- / .-.-. / ..--- ----- .---- --..
+WE LOVE PC ! | .-- . / .-.. --- ...- . / .--. -.-. / -.-.--
+
+
+User can also have encoded and decoded ham radio conversation:
+```python
+print('--------ENCODING HAM CONVERSATIONS-------------')
+sender  = input('Enter sender ==> ') #S1
+receiver = input('Enter receiver ==> ') #R1
+message = input('Enter message ==> ') #HI
+print('Encoded ham conversation: ', MorseHeap.encode_ham(sender,receiver message))
+print('--------DECODING HAM CONVERSATIONS-------------')
+ham_convo = input(('Enter ham conversation to decode ==> '))
+print(morse.decode_ham(ham_convo))
 ```
+Expected Output:
 
-## Integrate with your tools
+![printing morse tree](images/print_tree_terminal.jpg)
 
-- [ ] [Set up project integrations](https://gitlab.uwe.ac.uk/s2-fidan/worksheet2part2/-/settings/integrations)
 
-## Collaborate with your team
+## 💡 **Unit Testing**
+📍 Morseunit.py
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Program has some unit testing if user wants to test. There are 7 tests available:
 
-## Test and Deploy
+1. Testing for encode() function
 
-Use the built-in continuous integration in GitLab.
+    Encode function translate from text to morse. Here are the examples that are done under testing:
+    Assert Function | Message         | Encoded Version     | Message 2   | Comparison| Pass/Fail
+    -------------   | ------------- | ------------- | ------------- | ------------- | -------------
+    assertIn() | here | .... . .-. . | .. / .- -- / .... . .-. . | True |Pass
+    assertEqual() | Sude Fidan | ... ..- -.. . / ..-. .. -.. .- -. |... ..- -.. . / ..-. .. -.. .- -.| True|Pass
+    assertCountEqual() | 2023 | ..--- ----- ..--- ...-- | ..--- ----- ..--- ...-- | True|Pass
+    assertEqual() | 2023 + 2017 | ..--- ----- ..--- ...-- / .-.-. / ..--- ----- .---- --... | ..--- ----- ..--- ...-- / .-.-. / ..--- ----- .---- --... | True|Pass
+    assertEqual()| FIDAN | ..-. .. -.. .- -. | ..-. .. -.. .- -.| True|Pass
+    assertEqual()| WE LOVE PC ! | .-- . / .-.. --- ...- . / .--. -.-. / -.-.-- | .-- . / .-.. --- ...- . / .--. -.-. / -.-.--| True|Pass
+    assertNotIn() | benedict |-... . -. . -.. .. -.-. - | -... . -. . -.. | False|Pass
+    assertNotEqual() | internet of the things | .. -. - . .-. -. . - / --- ..-. / - .... . / - .... .. -. --. ... | .. -. - . .-. -. . - / --- ..-. / - .... . / - .... .. -. --. | False|Pass
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+2. Testing for decode() function
 
-***
+    Decode function translate from morse to text. Here are the examples that are done under testing:
 
-# Editing this README
+    Assert Function | Message         | Decoded Version     | Message 2   | Comparison | Pass/Fail
+    -------------   | ------------- | ------------- | ------------- | ------------- | ------------- 
+    assertIn() | ... ..-. | SF| SF IS MY CAPITALS | True |Pass
+    assertEqual()| ...- ... -.-. --- -.. . | VSCODE |VSCODE|True|Pass
+    assertCountEqual() |- .... . / . -. -.. | THE END | THE END| True|Pass
+    assertEqual() | ..--- ----- ..--- ...-- / -....- / ..--- ----- ..--- ....- | 2023 - 2024 | 2023 - 2024| True|Pass
+    assertNotEqual() | .. -. - . .-. -. | INTERN | INTERNET| False|Pass
+    assertNotIn() | - .... .. -. --. . | THINGE | I WAS BORN IN 2002 |False|Pass
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+3. Testing for is_empty() function:
+   
+    Is_Empty function returns True if tree is empty. Our morse code tree is already populated under constructor so it is not empty so function will return False.
 
-## Name
-Choose a self-explaining name for your project.
+    Assert Function | Function | True/False | Pass/Fail
+    -------------   | ------------- | -------------  | -------------  
+    assertFalse() | tree.is_empty() | True |Pass
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+4. Testing for is_not_empty() function:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+    Is_Not_Empty function returns True if tree is not empty. Our morse code tree is already populated under constructor so it is not empty so function will return True.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+    Assert Function | Function | True/False| Pass/Fail
+    -------------   | ------------- | -------------  | -------------
+    assertTrue() | tree.is_not_empty() | True |Pass
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+5. Testing for find() function:
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+    Find function finds the character from morse code inside of morse dictionary.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+    Assert Function | Char | Decoded Version | Location | True/False| Pass/Fail
+    -------------   | ------------- | -------------  | ------------- | -------------| -------------
+    assertIn() | .- | A | *morse.dictionary* | True |Pass
+    assertIn() | ...| S | SUDE| True |Pass
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+1. Testing for insert() function:
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+    Insert function inserts new character to tree with its node and to dictionary.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+    Assert Function | Symbol | Morse | Is Inserted ?| True/False| Pass/Fail
+    -------------   | ------------- | -------------  | ------------- | ------------- | -------------
+    assertNotIn() | @ | .--.-. |No | True |Pass
+    assertIn() | @| .--.-.| Yes | True|Pass
+    assertNotIn() | *Not Valid* | .........| No | False |Pass
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+7. Testing for additional symbols:
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+    Symbol | Morse | Symbol | Morse | Symbol | Morse 
+    -------------   | ------------- | -------------   | -------------   | ------------- | -------------   
+    . | .-.-.- | ( |-.--. | , | .-.-.- | ) | -.--.-
+    ! | -.-.-- | ¡ | --...- | -|-....- | _ |..--.-
+    +| .-.-. | ? | ..--.. | ¿ | ..-.- | & | .-...
+    ’ |  .----. | :| ---... |  ;| -.-.-. | ”| .-..-.
+    $ |...-..-
 
-## License
-For open source projects, say how it is licensed.
+    Above additional symbols are added to morse dictionary and tree.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+    Assert Function | Message         | Translation     | Message 2   | Comparison| Pass/Fail
+    -------------   | ------------- | ------------- | ------------- | ------------- | ------------- 
+    assertEqual() | .-.-.- | . | . | True|Pass
+    assertEqual() | ..--.- | _ | _ | True|Pass
+    assertIs() | -....- | - | - | True |Pass
+    assertIs() | --...- | ¡ | ¡| True|Pass
+    assertEqual() | ..--.. -.-.-- | ?! | ?!| True|Pass
+    assertEqual() | -.--. / -.--.- | ( ) | ( )| True|Pass
+    assertIn() | ...-..- | $| $€£ | True|Pass
+    assertIn() | .----.| ’| ’| True|Pass
+    assertIn() | ---...| : | *morse.dictionary* | True|Pass
+    assertIn() | + | .-.-. | *morse.dictionary* | True|Pass
+    assertCountEqual() | & | .-... | .-... | True|Pass
+    assertCountEqual() | - | -....- | -....- | True|Pass
+    assertNotIn() | ¿¿¿ | ..-.- ..-.- ..-.- | *morse.dictionary* | False|Pass
+    assertNotEqual() | -.-.-. | ;| A | False|Pass
+    assertNotEqual() | -.-.-. | *Not Valid* | ” | False|Pass
+    assertIsNot() | , | --..-- | ..--.- | False|Pass
+
+
+
+After running all tests expected output:
+
+![printing unit testing](images/unit_testing_terminal.jpg)
+
+## 📚 **Library** 
+Here is the library for unit testing: [unittest](https://docs.python.org/3/library/unittest.html)
+## 📪 **Installation** 
+User does not need to install any packages.
+
+## 🤓 **Maintainers** 
+Sude Fidan(@s2-fidan)
+## 📖  **Referencing** 
+* https://morsecode.world/international/translator.html
+* https://www.geeksforgeeks.org/morse-code-translator-python/
+* https://favtutor.com/blogs/heap-in-python
+* https://en.wikipedia.org/wiki/Binary_heap
+
