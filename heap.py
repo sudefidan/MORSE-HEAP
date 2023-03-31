@@ -55,7 +55,7 @@ class MorseHeap:
         sender= decoded[decoded.find('DE')+len('DE'):decoded.rfind('=')].split('=')[0]
         #message is between "="
         transmit = decoded[decoded.find('=')+len('='):decoded.rfind('=(')]
-        return f'RECEIVER: ' + receiver + f'\nSENDER: ' + sender + f'\nMESSAGE: ' + transmit
+        return 'RECEIVER: ' + receiver + '\nSENDER: ' + sender + '\nMESSAGE: ' + transmit
     
     
 

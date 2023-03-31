@@ -32,8 +32,10 @@ async def send_echo(sender, msg):
         # Get the client_id from the join message
         if message['type'] == 'join_evt': 
             client_id = message['client_id']
+
         # Send a ping to the server
-        await send_message(websocket, MorseHeap.encode_ham(sender, 'echo', msg), client_id)
+        #ECHO DE S =MSG=(
+        await send_message(websocket, MorseHeap.encode_ham(sender, 'echo', msg) , client_id)
         # Wait for the 'ping' response from the server
         response = await recv_message(websocket)
         return response
