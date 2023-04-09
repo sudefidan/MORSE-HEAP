@@ -119,11 +119,12 @@ Expected Output:
 
 Here is some other examples for echo server with their expected output to try:
 
-Sender | Messge | Expected Output
-------------- | -------------  | ------------- 
-s1 | secret | ... .---- -.. . . -.-. .... --- -...- ... . -.-. .-. . - -...- -.--.
-ben | dict | -... . -. -.. . . -.-. .... --- -...- -.. .. -.-. - -...- -.--.
+Sender | Messge | Expected Echo Output| Expected Time Output
+------------- | -------------  | -------------  | ------------- 
+s1 | secret | S1DEECHO=SECRET=( | S1DETIME=11:56:28=(
+ben | dict | BENDEECHO=DICT=( | BENDETIME=11:57:22=(
 
+❗️Not to forget about time will change in time server
 
 
 ## 💡 **Unit Testing**
@@ -177,21 +178,21 @@ Program has some unit testing if user wants to test. There are 5 tests available
     Echo server sends back an echo message to its sender. Here are the examples that are done under testing:
     Assert Function | Sender         | Message     | Server Result| Message 2  | Comparison | Pass/Fail
     -------------   | ------------- | ------------- | ------------- | ------------- | -------------| -------------
-    assertIn() | a | message | .- -.. . . -.-. .... --- -...- -- . ... ... .- --. . -...- -.--.|.- -.. . . -.-. .... --- -...- -- . ... ... .- --. . -...- -.--. | True | Pass
-    assertEqual() | a1 | message | .- .---- -.. . . -.-. .... --- -...- -- . ... ... .- --. . -...- -.--. | .- .---- -.. . . -.-. .... --- -...- -- . ... ... .- --. . -...- -.--. | True | Pass
-    assertCountEqual() | a1 b1 | is message too long? | .- .---- -... .---- -.. . . -.-. .... --- -...- .. ... -- . ... ... .- --. . - --- --- .-.. --- -. --. ..--.. -...- -.--. | .- .---- -... .---- -.. . . -.-. .... --- -...- .. ... -- . ... ... .- --. . - --- --- .-.. --- -. --. ..--.. -...- -.--.| True|Pass
-    assertNotEqual() | benedict |here is my message | -... . -. . -.. .. -.-. - -.. . . -.-. .... --- -...- .... . .-. . / .. ... / -- -.-- / -- . ... ... .- --. . -...- -.--. | -... . -. . -.. .. -.-. - -.. . . -.-. .... --- -...- - .... .. ... / .. ... / -. --- - / -- -.-- / -- . ... ... .- --. . -...- -.--. |False | Pass
-    assertNotIn() | iot |secret123 |.. --- - -.. . . -.-. .... --- -...- ... . -.-. .-. . - .---- ..--- ...-- -...- -.--. | .. --- - -.. . . -.-. .... --- -...- ... . -.-. .-. . - -.-.-- -...- -.-- | False|Pass
+    assertIn() | a | message | ADEECHO=MESSAGE=(|ADEECHO=MESSAGE=( | True | Pass
+    assertEqual() | a1 | message | A1DEECHO=MESSAGE=( | A1DEECHO=MESSAGE=( | True | Pass
+    assertCountEqual() | a1 b1 | is message too long? | A1B1DEECHO=ISMESSAGETOOLONG?=( | A1B1DEECHO=ISMESSAGETOOLONG?=(| True|Pass
+    assertNotEqual() | benedict |here is my message | BENEDICTDEECHO=HEREISMYMESSAGE=( | BENEDICTDEECHO=THISISNOTMYMESSAGE=( |False | Pass
+    assertNotIn() | iot |secret123 |IOTDEECHO=SECRET123=( | IOTDEECHO=SECRET!=( | False|Pass
 
 5. Testing for time server:
 
     Time server sends the time back to its sender. Here are the examples that are done under testing:
     Assert Function | Sender | Server Result| Message 2  | Comparison | Pass/Fail
     -------------   | ------------- | ------------- | ------------- | ------------- | -------------
-    assertIn() | 10+10 | 10+10DETIME=00:47:31=( | -.. .| True | Pass
-    assertIn() | sude fidan | SUDE FIDANDETIME=30:31:50=( | -...- -.--. | True | Pass
-    assertIn() | sender | SENDERDETIME=00:47:31=( | - .. -- . | True|Pass
-    assertNotEqual() | benedict 2023 | BENEDICT 2023DETIME=00:47:31=( | -... . -. . -.. .. -.-. - ..--- ----- ..--- ...-- -.. . - .. -- . -...- .---- ....- ---... ....- --... ---... ...-- --... -...- -.--. | False(Server time changes) |Pass
+    assertIn() | 10+10 | 10+10DETIME=00:47:31=( | DE| True | Pass
+    assertIn() | sude fidan | SUDE FIDANDETIME=30:31:50=( | =( | True | Pass
+    assertIn() | sender | SENDERDETIME=00:47:31=( |TIME | True|Pass
+    assertNotEqual() | benedict 2023 | BENEDICT 2023DETIME=00:47:31=( | BENEDICT2023DETIME=14:47:37=( | False(Server time changes) |Pass
     assertIsNotNone() | 2020+2023 | 2020+2023DETIME=09:37:51=( |None | False (It returns something)|Pass
 
 

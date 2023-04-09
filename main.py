@@ -3,6 +3,7 @@ from morse_server import *
 
 if __name__ == "__main__":
     morse = MorseHeap()
+    morse_tree = MorseTree()
 
     #task1 - decode E.g ... ..- -.. . ==> sude 
     print('--------MORSE TO TEXT-------------')
@@ -31,7 +32,7 @@ if __name__ == "__main__":
     message = input(('Hey sender, enter your message ==> ')) #msg
     print('--------SERVER:ECHO-------------')
     #ECHO SERVER RESPONSE: SFDEECHO=MSG=( ==>  ... ..-. -.. . . -.-. .... --- -...- -- ... --. -...- -.--.
-    print(f'Server response: ', asyncio.run(send_echo(sender,message))) 
+    print(f'Server response: ', asyncio.run(send_echo(sender,message)))
     print('--------SERVER:TIME-------------')
     #TIME SERVER RESPONSE: SFDETIME=15:04:21=( ==>  SFDETIME=15:04:21=( ==> time will be changed with server time
     print('Server response: ', asyncio.run(send_time(sender)))

@@ -33,12 +33,15 @@ async def send_echo(sender, msg):
         if message['type'] == 'join_evt': 
             client_id = message['client_id']
 
-        # Send a ping to the server
+        #ham encode 
         #ECHO DE S =MSG=(
-        await send_message(websocket, MorseHeap.encode_ham(sender, 'echo', msg) , client_id)
+        morse = MorseHeap()
+        encoded = morse.encode_ham(sender, 'echo', msg)
+        # Send a ping to the server
+        await send_message(websocket, encoded, client_id)
         # Wait for the 'ping' response from the server
         response = await recv_message(websocket)
-        return response
+        return morse.decode_bt(response)
 
 async def send_time(sender):
     uri = "ws://localhost:10102"
@@ -48,9 +51,12 @@ async def send_time(sender):
         # Get the client_id from the join message
         if message['type'] == 'join_evt': 
             client_id = message['client_id']
+        #ham encode
+        morse = MorseHeap()
+        encoded = morse.encode_ham(sender, 'time', 'msg')
         # Send a ping to the server
-        await send_message(websocket, MorseHeap.encode_ham(sender, 'time', 'msg'), client_id)
+        await send_message(websocket,encoded , client_id)
         # Wait for the 'ping' response from the server
         response = await recv_message(websocket)
-        return response
+        return morse.decode_bt(response)
 

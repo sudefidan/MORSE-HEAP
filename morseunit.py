@@ -36,18 +36,18 @@ class TestMorse(unittest.TestCase):
 
     #test4 - echo server
     def test_echo(self):
-        self.assertIn(asyncio.run(send_echo('a','message')),('.- -.. . . -.-. .... --- -...- -- . ... ... .- --. . -...- -.--.')) #true  ==> ADEECHO=MESSAGE=(
-        self.assertEqual(asyncio.run(send_echo('a1','message')), '.- .---- -.. . . -.-. .... --- -...- -- . ... ... .- --. . -...- -.--.') #true ==> A1DEECHO=MESSAGE=(
-        self.assertCountEqual('.- .---- -... .---- -.. . . -.-. .... --- -...- .. ... -- . ... ... .- --. . - --- --- .-.. --- -. --. ..--.. -...- -.--.',asyncio.run(send_echo('a1 b1','is message too long?'))) #true ==> A1B1DEECHO=ISMESSAGETOOLONG?=(
-        self.assertNotEqual( asyncio.run(send_echo('benedict','here is my message')), '-... . -. . -.. .. -.-. - -.. . . -.-. .... --- -...- - .... .. ... / .. ... / -. --- - / -- -.-- / -- . ... ... .- --. . -...- -.--.') #false ==> Message: HEREISMYMESSAGE not THIS IS NOT MY MESSAGE
-        self.assertNotIn( '.. --- - -.. . . -.-. .... --- -...- ... . -.-. .-. . - -.-.-- -...- -.--.', asyncio.run(send_echo('iot','secret123'))) #false ==> Message: secret123 not secret!
+        self.assertIn(asyncio.run(send_echo('a','message')),('ADEECHO=MESSAGE=(')) #true
+        self.assertEqual(asyncio.run(send_echo('a1','message')), 'A1DEECHO=MESSAGE=(') #true ==> 
+        self.assertCountEqual('A1B1DEECHO=ISMESSAGETOOLONG?=(',asyncio.run(send_echo('a1 b1','is message too long?'))) #true ==> A1B1DEECHO=ISMESSAGETOOLONG?=(
+        self.assertNotEqual( asyncio.run(send_echo('benedict','here is my message')), 'BENEDICTDEECHO=THISISNOTMYMESSAGE=(') #false ==> Message: HEREISMYMESSAGE not THIS IS NOT MY MESSAGE
+        self.assertNotIn( 'IOTDEECHO=SECRET!=(', asyncio.run(send_echo('iot','secret123'))) #false ==> Message: secret123 not secret!
 
     #test5 - time server
     def test_time(self):
-        self.assertIn('-.. .',asyncio.run(send_time('10+10'))) #true  -.. .==> de
-        self.assertIn('-...- -.--.',asyncio.run(send_time('sude fidan'))) #true  -...- -.--. ==> =(
-        self.assertIn('- .. -- .',asyncio.run(send_time('sender'))) #true  - .. -- .==> time
-        self.assertNotEqual( asyncio.run(send_time('benedict 2023')), '-... . -. . -.. .. -.-. - ..--- ----- ..--- ...-- -.. . - .. -- . -...- .---- ....- ---... ....- --... ---... ...-- --... -...- -.--.') #false ==> server time changes
+        self.assertIn('DE',asyncio.run(send_time('10+10'))) #true
+        self.assertIn('=(',asyncio.run(send_time('sude fidan'))) #true 
+        self.assertIn('TIME',asyncio.run(send_time('sender'))) #true
+        self.assertNotEqual( asyncio.run(send_time('benedict 2023')), 'BENEDICT2023DETIME=14:47:37=(') #false ==> server time changes
         self.assertIsNotNone(asyncio.run(send_time('2020+2023')))
 
 if __name__ == '__main__':
