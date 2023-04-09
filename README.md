@@ -55,7 +55,7 @@ Morse  | Text
 ..--- ----- ..--- ...-- / .-.-. / ..--- ----- .---- --.. | 2023 + 2017
 .-- . / .-.. --- ...- . / .--. -.-. / -.-.-- | WE LOVE PC !
 
-1. User can have encoded ham radio conversation:
+2. User can have encoded ham radio conversation:
 ```python
 print('--------ENCODING HAM CONVERSATIONS-------------')
 sender  = input('Enter sender ==> ') #S1
@@ -71,13 +71,13 @@ Here is some other examples with their expected output to try:
 
 Sender  | Receiver | Message | Expected Output
 ------------- | ------------- | ------------- | ------------- 
-Sude Fidan | SF | message | 
-10 | 11 | 12 |
-internet | of the | things
-benedict | iot | benedict cuberoo
+Sude Fidan | SF | message | ... ..-. -.. . ... ..- -.. . / ..-. .. -.. .- -. -...- -- . ... ... .- --. . -...- -.--.
+10 | 11 | 12 | .---- .---- -.. . .---- ----- -...- .---- ..--- -...- -.--.
+internet | of the | things | --- ..-. / - .... . -.. . .. -. - . .-. -. . - -...- - .... .. -. --. ... -...- -.--.
+benedict | iot | benedict cuberoo | .. --- - -.. . -... . -. . -.. .. -.-. - -...- -... . -. . -.. .. -.-. - / -.-. ..- -... . .-. --- --- -...- -.--.
 
 
-1. User can have decoded ham radio conversation:
+3. User can have decoded ham radio conversation:
 
 ```python
 print('--------DECODING HAM CONVERSATIONS-------------')
@@ -93,6 +93,36 @@ Here is some other examples with their expected output to try:
 
 Conversation | Expected Output
 ------------- | -------------  
+... . -. -.. -.. . .-. . -.-. . .. ...- . -...- -.-. --- -. ...- --- -...- -.--. | RECEIVER: SEND, SENDER: RECEIVE, MESSAGE: CONVO
+.---- ..--- ...-- -.. . ....- ..... -.... -...- --... ---.. ----. -...- -.--. | RECEIVER: 123, SENDER: 456, MESSAGE: 789
+
+4. User can use echo and time server functions:
+   
+Echo server send back the message to sender while time server send back the time of the message has been sent to sender.
+
+```python
+print("Echo client")
+    asyncio.run(main())
+    sender = input(('Hey sender, enter your name ==> ')) #sf
+    message = input(('Hey sender, enter your message ==> ')) #msg
+    print('--------SERVER:ECHO-------------')
+    #ECHO SERVER RESPONSE: SFDEECHO=MSG=( ==>  ... ..-. -.. . . -.-. .... --- -...- -- ... --. -...- -.--.
+    print(f'Server response: ', asyncio.run(send_echo(sender,message))) 
+    print('--------SERVER:TIME-------------')
+    #TIME SERVER RESPONSE: SFDETIME=15:04:21=( ==>  SFDETIME=15:04:21=( ==> time will be changed with server time
+    print('Server response: ', asyncio.run(send_time(sender)))
+```
+
+Expected Output:
+
+![server](images/server.png)
+
+Here is some other examples for echo server with their expected output to try:
+
+Sender | Messge | Expected Output
+------------- | -------------  | ------------- 
+s1 | secret | ... .---- -.. . . -.-. .... --- -...- ... . -.-. .-. . - -...- -.--.
+ben | dict | -... . -. -.. . . -.-. .... --- -...- -.. .. -.-. - -...- -.--.
 
 
 
@@ -162,7 +192,7 @@ Program has some unit testing if user wants to test. There are 5 tests available
     assertIn() | sude fidan | SUDE FIDANDETIME=30:31:50=( | -...- -.--. | True | Pass
     assertIn() | sender | SENDERDETIME=00:47:31=( | - .. -- . | True|Pass
     assertNotEqual() | benedict 2023 | BENEDICT 2023DETIME=00:47:31=( | -... . -. . -.. .. -.-. - ..--- ----- ..--- ...-- -.. . - .. -- . -...- .---- ....- ---... ....- --... ---... ...-- --... -...- -.--. | False(Server time changes) |Pass
-    assertIsNotNone() | 2020+2023 | 2020+2023DETIME=09:37:51=( || False (It returns something)|Pass
+    assertIsNotNone() | 2020+2023 | 2020+2023DETIME=09:37:51=( |None | False (It returns something)|Pass
 
 
 
